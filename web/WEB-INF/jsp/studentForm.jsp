@@ -27,7 +27,7 @@
 	</form>
 </c:if>
 
-<form action="Index">
+<form action="StudentList">
 	<input type="submit" value="Back">
 </form>
 

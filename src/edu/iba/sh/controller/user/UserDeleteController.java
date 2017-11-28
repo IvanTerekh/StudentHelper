@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class StudentDelete
+ * Servlet implementation class StudentDeleteController
  */
-@WebServlet("/StudentDelete")
-public class UserDelete extends HttpServlet {
+@WebServlet("/UserDelete")
+public class UserDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		deleteStudent(id);
-		request.getRequestDispatcher("/StudentList").forward(request, response);
+		request.getRequestDispatcher("/UserList").forward(request, response);
 	}
 
 	private void deleteStudent(int id) {

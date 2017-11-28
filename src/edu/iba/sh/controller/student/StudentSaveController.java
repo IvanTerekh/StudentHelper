@@ -1,4 +1,4 @@
-package edu.iba.sh.controller.user;
+package edu.iba.sh.controller.student;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import edu.iba.sh.bean.Student;
 
 /**
- * Servlet implementation class StudentSave
+ * Servlet implementation class StudentSaveController
  */
 @WebServlet("/StudentSave")
-public class UserSave extends HttpServlet {
+public class StudentSaveController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,7 +41,5 @@ public class UserSave extends HttpServlet {
 	private void addNewStudent(Student s) {
 		System.out.println("Student was added");	
 	}
-	
-	
 
 }

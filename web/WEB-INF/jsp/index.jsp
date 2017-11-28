@@ -13,7 +13,7 @@
 <body>
 
 <a href="StudentList">Students</a><br>
-<a href="#">Groups</a><br>
+<a href="GroupList">Groups</a><br>
 <a href="#">Marks</a><br>
 <a href="#">Professors</a><br>
 <a href="#">Studies</a><br>

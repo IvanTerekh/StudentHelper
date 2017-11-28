@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class StudentDelete
+ * Servlet implementation class StudentDeleteController
  */
 @WebServlet("/StudentDelete")
-public class StudentDelete extends HttpServlet {
+public class StudentDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,4 +1,4 @@
-package edu.iba.sh.controller.student;
+package edu.iba.sh.controller.user;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import edu.iba.sh.bean.Student;
 
 /**
- * Servlet implementation class StudentSave
+ * Servlet implementation class StudentSaveController
  */
-@WebServlet("/StudentSave")
-public class StudentSave extends HttpServlet {
+@WebServlet("/UserSave")
+public class UserSaveController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

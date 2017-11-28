@@ -1,6 +1,6 @@
 package edu.iba.sh.bean;
 
-public class Professors {
+public class Professor {
 	
 	private int id;
 
@@ -64,6 +64,6 @@ public class Professors {
 	
 	@Override
 	public boolean equals(Object o) {
-		return (o instanceof Professors)&&((Professors)o).id==this.id;
+		return (o instanceof Professor)&&((Professor)o).id==this.id;
 	}
 }

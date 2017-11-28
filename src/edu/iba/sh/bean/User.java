@@ -32,11 +32,4 @@ public class User {
 		this.role = role;
 	}
 
-	/*public User(String user, String password, String role) {
-		super();
-		this.user = user;
-		this.password = password;
-		this.role = role;
-	}*/
-
 }
