@@ -14,20 +14,19 @@ import edu.iba.sh.bean.User;
  * Servlet implementation class StudentForm
  */
 @WebServlet("/UserForm")
-
 public class UserFormController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idStr = request.getParameter("user");
+		String userStr = request.getParameter("user");
 		User user;
-		if (idStr == null){
+		if (userStr == null){
 			user = new User();
 			user.setUser("");
 		} else {
-			user = getUser(idStr);
+			user = getUser(userStr);
 		}
 		
 		request.setAttribute("user", user);
-		request.getRequestDispatcher("/WEB-INF/jsp/studentForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/userForm.jsp").forward(request, response);
 	}
 
 	private User getUser(String id) {

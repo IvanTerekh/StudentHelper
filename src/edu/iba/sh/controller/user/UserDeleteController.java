@@ -15,13 +15,13 @@ public class UserDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		deleteStudent(id);
+		String user = request.getParameter("user");
+		deleteStudent(user);
 		request.getRequestDispatcher("/UserList").forward(request, response);
 	}
 
-	private void deleteStudent(int id) {
-		System.out.println("Student was deleted");
+	private void deleteStudent(String user) {
+		System.out.println("User " + user + " was deleted");
 	}
 
 }

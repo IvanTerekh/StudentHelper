@@ -20,8 +20,8 @@ public class UserListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<User> students = getUserList();
-		request.setAttribute("userList", students);
+		List<User> users = getUserList();
+		request.setAttribute("users", users);
 		request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp").forward(request, response);
 	}
 	
@@ -32,6 +32,7 @@ public class UserListController extends HttpServlet {
 		user.setUser("Jane");
 		user.setPassword("password");
 		user.setRole("Admin");
+		list.add(user);
 		
 		return list;
 	}
