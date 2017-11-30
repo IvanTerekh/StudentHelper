@@ -1,5 +1,7 @@
 package edu.iba.sh.dao;
 
+import edu.iba.sh.bean.Group;
+
 public class DaoFactory {
 
 	enum Type {
@@ -16,6 +18,28 @@ public class DaoFactory {
 			return new edu.iba.sh.dao.mysql.StudentDaoImplementation();
 		default:
 			return null;
+		}
+	}
+
+	public static GroupDao getGroupDao() {
+		switch (currentType) {
+			case DB2:
+				return new edu.iba.sh.dao.db2.GroupDaoImplementation();
+			case MySql:
+				return new edu.iba.sh.dao.mysql.GroupDaoImplementation();
+			default:
+				return null;
+		}
+	}
+
+	public static UserDao getUserDao() {
+		switch (currentType) {
+			case DB2:
+				return new edu.iba.sh.dao.db2.UserDaoImplementation();
+			case MySql:
+				return new edu.iba.sh.dao.mysql.UserDaoImplementation();
+			default:
+				return null;
 		}
 	}
 }

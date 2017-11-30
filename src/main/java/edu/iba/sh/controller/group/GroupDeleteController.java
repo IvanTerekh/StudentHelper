@@ -1,5 +1,8 @@
 package edu.iba.sh.controller.group;
 
+import edu.iba.sh.dao.DaoException;
+import edu.iba.sh.dao.DaoFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,11 +21,16 @@ public class GroupDeleteController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String groupNumber = request.getParameter("groupNumber");
         deleteGroup(groupNumber);
-        request.getRequestDispatcher("/GroupList").forward(request, response);
+        response.sendRedirect("/GroupList");
+//        request.getRequestDispatcher("/GroupList").forward(request, response);
     }
 
-    private void deleteGroup(String groupNumber) {
-        System.out.println("Group " + groupNumber + " was deleted");
+    private void deleteGroup(String groupNumber) throws ServletException {
+        try {
+            DaoFactory.getGroupDao().deleteByGroupNumber(groupNumber);
+        } catch (DaoException e) {
+            throw new ServletException(e);
+        }
     }
 
 }

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import edu.iba.sh.bean.User;
+import edu.iba.sh.dao.DaoException;
+import edu.iba.sh.dao.DaoFactory;
 
 /**
  * Servlet implementation class StudentSaveController
@@ -30,21 +32,27 @@ public class UserSaveController extends HttpServlet {
 		if (oldUser.equals("")){
 			addNewUser(user);
 		} else {
-			updateUser(user);
+			updateUser(user, oldUser);
 		}
 		
 		request.setAttribute("user", user);
 		request.getRequestDispatcher("/WEB-INF/jsp/userForm.jsp").forward(request, response);
 	}
 
-	private void updateUser(User s) {
-		System.out.println("User was updated");
+	private void updateUser(User user, String oldUser) throws ServletException {
+		try {
+			DaoFactory.getUserDao().update(user, oldUser);
+		} catch (DaoException e) {
+			throw new ServletException(e);
+		}
 	}
 
-	private void addNewUser(User s) {
-		System.out.println("User was added");	
+	private void addNewUser(User user) throws ServletException {
+		try {
+			DaoFactory.getUserDao().create(user);
+		} catch (DaoException e) {
+			throw new ServletException(e);
+		}
 	}
-	
-	
 
 }

@@ -1,6 +1,8 @@
 package edu.iba.sh.controller.group;
 
 import edu.iba.sh.bean.Group;
+import edu.iba.sh.dao.DaoException;
+import edu.iba.sh.dao.DaoFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,24 +29,11 @@ public class GroupListController extends HttpServlet {
     }
 
 
-    public List<Group> getGroups() {
-        List<Group> groups = new ArrayList<Group>();
-
-        Group group = new Group();
-        group.setGroupNumber("1");
-        group.setAvgMark(3.5);
-        groups.add(group);
-
-        group = new Group();
-        group.setGroupNumber("1A");
-        group.setAvgMark(5.0);
-        groups.add(group);
-
-        group = new Group();
-        group.setGroupNumber("42");
-        group.setAvgMark(7.5);
-        groups.add(group);
-
-        return groups;
+    public List<Group> getGroups() throws ServletException {
+        try {
+            return DaoFactory.getGroupDao().getAll();
+        } catch (DaoException e) {
+            throw new ServletException(e);
+        }
     }
 }

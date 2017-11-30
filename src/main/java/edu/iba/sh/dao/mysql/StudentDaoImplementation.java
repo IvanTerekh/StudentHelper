@@ -17,7 +17,7 @@ public class StudentDaoImplementation implements StudentDao {
     private static final String GET_BY_ID_SQL = "SELECT "
             + " ID, FIRST_NAME, SECOND_NAME, AVG_MARK, GROUP_NUMBER "
             + " FROM STUDENTS WHERE ID = ? ";
-    private static final String DELETE_BY_ID_SQL = "DELETE FROM STUDENT "
+    private static final String DELETE_BY_ID_SQL = "DELETE FROM STUDENTS "
             + " WHERE ID = ? ";
     private static final String UPDATE_SQL = "UPDATE STUDENTS "
             + " SET FIRST_NAME = ?, SECOND_NAME = ?, AVG_MARK = ?, GROUP_NUMBER = ? "
@@ -53,12 +53,12 @@ public class StudentDaoImplementation implements StudentDao {
             preparedStatement.setDouble(3, student.getAvgMark());
             preparedStatement.setString(4, student.getGroupNumber());
             preparedStatement.execute();
+
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-            System.out.println(generatedKeys.getInt(1));
-            System.out.println(generatedKeys.getObject(2));
-            System.out.println(generatedKeys.getObject(3));
-            System.out.println(generatedKeys.getObject(4));
-            System.out.println(generatedKeys.getObject(5));
+            generatedKeys.next();
+            int generatedId = generatedKeys.getInt(1);
+
+            student.setId(generatedId);
         } catch (SQLException e) {
             throw new DaoException(e);
         }

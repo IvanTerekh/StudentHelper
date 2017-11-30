@@ -1,6 +1,8 @@
 package edu.iba.sh.controller.group;
 
 import edu.iba.sh.bean.Group;
+import edu.iba.sh.dao.DaoException;
+import edu.iba.sh.dao.DaoFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,18 +29,26 @@ public class GroupSaveController extends HttpServlet {
         if(oldGroupNumber.equals("")){
             addGroup(group);
         } else {
-            updateGroup(group);
+            updateGroup(group, oldGroupNumber);
         }
 
         request.setAttribute("group", group);
         request.getRequestDispatcher("WEB-INF/jsp/groupForm.jsp").forward(request, response);
     }
 
-    private void updateGroup(Group group) {
-        System.out.println("Group was updated");
+    private void updateGroup(Group group, String oldGroupNumber) throws ServletException {
+        try {
+            DaoFactory.getGroupDao().update(group, oldGroupNumber);
+        } catch (DaoException e) {
+            throw new ServletException(e);
+        }
     }
 
-    private void addGroup(Group group) {
-        System.out.println("Group was added");
+    private void addGroup(Group group) throws ServletException {
+        try {
+            DaoFactory.getGroupDao().create(group);
+        } catch (DaoException e) {
+            throw new ServletException(e);
+        }
     }
 }

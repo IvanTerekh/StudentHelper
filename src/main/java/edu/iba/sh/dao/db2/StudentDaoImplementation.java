@@ -1,9 +1,6 @@
 package edu.iba.sh.dao.db2;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +20,14 @@ public class StudentDaoImplementation implements StudentDao {
     private static final String GET_BY_ID_SQL = "SELECT "
             + " ID, FIRST_NAME, SECOND_NAME, AVG_MARK, GROUP_NUMBER "
             + " FROM STUDENTS WHERE ID = ? ";
-    private static final String DELETE_BY_ID_SQL = "DELETE FROM STUDENT "
+    private static final String DELETE_BY_ID_SQL = "DELETE FROM STUDENTS "
             + " WHERE ID = ? ";
+    private static final String UPDATE_SQL = "UPDATE STUDENTS "
+            + " SET FIRST_NAME = ?, SECOND_NAME = ?, AVG_MARK = ?, GROUP_NUMBER = ? "
+            + " WHERE ID = ? ";
+    private static final String CREATE_SQL = "INSERT INTO STUDENTS "
+            + " (FIRST_NAME, SECOND_NAME, AVG_MARK, GROUP_NUMBER) "
+            + " VALUES (?, ?, ?, ?) ";
 
     private Connection getConnection() throws DaoException {
         try {
@@ -38,12 +41,28 @@ public class StudentDaoImplementation implements StudentDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         }
-
     }
 
     @Override
     public void create(Student student) throws DaoException {
+        Connection connection = getConnection();
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(CREATE_SQL, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, student.getFirstName());
+            preparedStatement.setString(2, student.getSecondName());
+            preparedStatement.setDouble(3, student.getAvgMark());
+            preparedStatement.setString(4, student.getGroupNumber());
+            preparedStatement.execute();
 
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            generatedKeys.next();
+            int generatedId = generatedKeys.getInt(1);
+
+            student.setId(generatedId);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override
@@ -98,7 +117,21 @@ public class StudentDaoImplementation implements StudentDao {
 
     @Override
     public boolean update(Student student) throws DaoException {
-        return false;
+        Connection connection = getConnection();
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(UPDATE_SQL);
+            preparedStatement.setString(1, student.getFirstName());
+            preparedStatement.setString(2, student.getSecondName());
+            preparedStatement.setDouble(3, student.getAvgMark());
+            preparedStatement.setString(4, student.getGroupNumber());
+            preparedStatement.setLong(5, student.getId());
+            int count = preparedStatement.executeUpdate();
+
+            return count == 1;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override

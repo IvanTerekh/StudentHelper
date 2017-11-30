@@ -1,6 +1,8 @@
 package edu.iba.sh.controller.group;
 
 import edu.iba.sh.bean.Group;
+import edu.iba.sh.dao.DaoException;
+import edu.iba.sh.dao.DaoFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,10 +32,11 @@ public class GroupFormController extends HttpServlet{
         request.getRequestDispatcher("/WEB-INF/jsp/groupForm.jsp").forward(request, response);
     }
 
-    private Group getGroup(String groupNumber) {
-        Group group = new Group();
-        group.setGroupNumber(groupNumber);
-        group.setAvgMark(4.1);
-        return group;
+    private Group getGroup(String groupNumber) throws ServletException {
+        try {
+            return DaoFactory.getGroupDao().getByGroupNumber(groupNumber);
+        } catch (DaoException e) {
+            throw new ServletException(e);
+        }
     }
 }
