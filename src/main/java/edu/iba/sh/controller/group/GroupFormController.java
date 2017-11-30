@@ -2,7 +2,6 @@ package edu.iba.sh.controller.group;
 
 import edu.iba.sh.bean.Group;
 
-import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

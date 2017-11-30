@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.iba.sh.bean.Student;
+import edu.iba.sh.dao.DaoException;
+import edu.iba.sh.dao.DaoFactory;
 
 /**
  * Servlet implementation class StudentForm
@@ -30,15 +32,12 @@ public class StudentFormController extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/jsp/studentForm.jsp").forward(request, response);
     }
 
-    private Student getStudent(int id) {
-        //student to return
-        Student student = new Student();
-        student.setId(id);
-        student.setAvgMark(9);
-        student.setFirstName("Kate");
-        student.setGroupNumber("9");
-        student.setSecondName("Makarevich");
-        return student;
+    private Student getStudent(int id) throws ServletException {
+        try {
+            return DaoFactory.getStudentDao().getById(id);
+        } catch (DaoException e) {
+            throw new ServletException(e);
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

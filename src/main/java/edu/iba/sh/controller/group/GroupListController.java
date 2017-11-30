@@ -28,7 +28,7 @@ public class GroupListController extends HttpServlet {
 
 
     public List<Group> getGroups() {
-        List<Group> groups = new ArrayList<>();
+        List<Group> groups = new ArrayList<Group>();
 
         Group group = new Group();
         group.setGroupNumber("1");

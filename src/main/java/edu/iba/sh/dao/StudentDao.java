@@ -6,7 +6,7 @@ import edu.iba.sh.bean.Student;
 
 public interface StudentDao {
 
-	void create(StudentDao student) throws DaoException;
+	void create(Student student) throws DaoException;
 	
 	List<Student> getAll() throws DaoException;
 	

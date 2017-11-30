@@ -1,5 +1,8 @@
 package edu.iba.sh.controller.student;
 
+import edu.iba.sh.dao.DaoException;
+import edu.iba.sh.dao.DaoFactory;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +23,12 @@ public class StudentDeleteController extends HttpServlet {
 		request.getRequestDispatcher("/StudentList").forward(request, response);
 	}
 
-	private void deleteStudent(int id) {
-		System.out.println("Student was deleted");
+	private void deleteStudent(int id) throws ServletException {
+		try {
+			DaoFactory.getStudentDao().deleteById(id);
+		} catch (DaoException e) {
+			throw new ServletException(e);
+		}
 	}
 
 }

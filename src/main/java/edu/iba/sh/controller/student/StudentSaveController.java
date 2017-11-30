@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.iba.sh.bean.Student;
+import edu.iba.sh.dao.DaoException;
+import edu.iba.sh.dao.DaoFactory;
 
 /**
  * Servlet implementation class StudentSaveController
@@ -24,7 +26,7 @@ public class StudentSaveController extends HttpServlet {
 		student.setGroupNumber(request.getParameter("groupNumber"));
 		student.setSecondName(request.getParameter("secondName"));
 		
-		if (student.getId()<0){
+		if (student.getId() < 0){
 			addNewStudent(student);
 		} else {
 			updateStudent(student);
@@ -34,12 +36,20 @@ public class StudentSaveController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/jsp/studentForm.jsp").forward(request, response);
 	}
 
-	private void updateStudent(Student s) {
-		System.out.println("Student was updated");
+	private void updateStudent(Student student) throws ServletException {
+		try {
+			DaoFactory.getStudentDao().update(student);
+		} catch (DaoException e) {
+			throw new ServletException(e);
+		}
 	}
 
-	private void addNewStudent(Student s) {
-		System.out.println("Student was added");	
+	private void addNewStudent(Student student) throws ServletException {
+		try {
+			DaoFactory.getStudentDao().create(student);
+		} catch (DaoException e) {
+			throw new ServletException(e);
+		}
 	}
 
 }
