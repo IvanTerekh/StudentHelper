@@ -29,7 +29,7 @@ public class AuthentificationFilter implements Filter {
 		
 		if (httpServletRequest.getSession().getAttribute("user") != null ||
 				url.endsWith("login") ||
-				url.endsWith("Authentificate") ||
+				url.endsWith("Authenticate") ||
 				url.contains(".")){
 			chain.doFilter(request, response);
 		} else {

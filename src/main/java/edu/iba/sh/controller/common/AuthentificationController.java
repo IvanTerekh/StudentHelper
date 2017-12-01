@@ -14,7 +14,7 @@ import edu.iba.sh.dao.DaoFactory;
 /**
  * Servlet implementation class AuthentificationController
  */
-@WebServlet("/Authentificate")
+@WebServlet("/Authenticate")
 public class AuthentificationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
