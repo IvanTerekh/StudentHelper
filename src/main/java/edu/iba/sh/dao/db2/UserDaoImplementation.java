@@ -29,6 +29,11 @@ public class UserDaoImplementation implements UserDao {
     private static final String CREATE_SQL = "INSERT INTO users "
             + " (USER, PASSWORD, ROLE) "
             + " VALUES (?, ?, ?) ";
+    private static final String GET_BY_USER_AND_PASSWORD_SQL = " SELECT \"USER\", PASSWORD, ROLE " +
+            " FROM USERS " +
+            " WHERE \"USER\" = ? " +
+            " AND " +
+            " PASSWORD = ? ";
 
     private Connection getConnection() throws DaoException {
         try {
@@ -56,6 +61,11 @@ public class UserDaoImplementation implements UserDao {
             preparedStatement.execute();
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
         }
     }
 
@@ -79,6 +89,11 @@ public class UserDaoImplementation implements UserDao {
             return list;
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
         }
     }
 
@@ -102,6 +117,11 @@ public class UserDaoImplementation implements UserDao {
             return null;
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
         }
     }
 
@@ -120,6 +140,11 @@ public class UserDaoImplementation implements UserDao {
             return count == 1;
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
         }
     }
 
@@ -135,6 +160,41 @@ public class UserDaoImplementation implements UserDao {
             return count == 1;
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
+        }
+    }
+
+    @Override
+    public User getByUserAndPassword(String user, String password)
+            throws DaoException {
+        Connection connection = getConnection();
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(GET_BY_USER_AND_PASSWORD_SQL);
+            preparedStatement.setString(1, user);
+            preparedStatement.setString(2, password);
+            ResultSet set = preparedStatement.executeQuery();
+
+            if (set.next()) {
+                User userBean = new User();
+                userBean.setUser(user);
+                userBean.setPassword(password);
+                userBean.setRole(set.getString("ROLE"));
+                return userBean;
+            }
+
+            return null;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
         }
     }
 }

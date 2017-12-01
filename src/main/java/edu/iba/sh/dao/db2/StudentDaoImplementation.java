@@ -62,6 +62,11 @@ public class StudentDaoImplementation implements StudentDao {
             student.setId(generatedId);
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
         }
     }
 
@@ -87,6 +92,11 @@ public class StudentDaoImplementation implements StudentDao {
             return list;
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
         }
     }
 
@@ -112,6 +122,11 @@ public class StudentDaoImplementation implements StudentDao {
             return null;
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
         }
     }
 
@@ -131,6 +146,11 @@ public class StudentDaoImplementation implements StudentDao {
             return count == 1;
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
         }
     }
 
@@ -146,6 +166,11 @@ public class StudentDaoImplementation implements StudentDao {
             return count == 1;
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
         }
     }
 

@@ -15,4 +15,7 @@ public interface UserDao {
     boolean update(User user, String oldUser) throws DaoException;
 
     boolean deleteByUser(String user) throws DaoException;
+
+    User getByUserAndPassword(String user, String password) throws DaoException;
+
 }

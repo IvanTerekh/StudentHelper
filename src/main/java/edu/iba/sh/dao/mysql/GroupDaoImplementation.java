@@ -54,6 +54,11 @@ public class GroupDaoImplementation implements GroupDao {
             preparedStatement.execute();
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
         }
     }
 
@@ -76,6 +81,11 @@ public class GroupDaoImplementation implements GroupDao {
             return list;
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
         }
     }
 
@@ -98,6 +108,11 @@ public class GroupDaoImplementation implements GroupDao {
             return null;
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
         }
     }
 
@@ -115,6 +130,11 @@ public class GroupDaoImplementation implements GroupDao {
             return count == 1;
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
         }
     }
 
@@ -130,6 +150,11 @@ public class GroupDaoImplementation implements GroupDao {
             return count == 1;
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+            }
         }
     }
 }
