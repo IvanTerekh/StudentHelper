@@ -17,7 +17,7 @@
     <br>Avg mark:<input name="avgMark" value="${student.avgMark}">
     <br>Group number:<input name="groupNumber" value="${student.groupNumber}">
     
-    <input type="submit" value="Save">
+    <br><input type="submit" value="Save">
 </form>
 
 <c:if test="${student.id ge 0}">

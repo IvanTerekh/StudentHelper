@@ -11,31 +11,18 @@ import edu.iba.sh.bean.User;
 import edu.iba.sh.dao.DaoException;
 import edu.iba.sh.dao.DaoFactory;
 
-/**
- * Servlet implementation class AuthentificationController
- */
 @WebServlet("/Authenticate")
-public class AuthentificationController extends HttpServlet {
+public class AuthenticationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AuthentificationController() {
+
+    public AuthenticationController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String user = request.getParameter("user");
@@ -45,7 +32,7 @@ public class AuthentificationController extends HttpServlet {
 				request.setAttribute("message", "User or password is incorrect");
 				request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
 			} else {
-				request.getSession().setAttribute("user", user);
+				request.getSession().setAttribute("user", userBean);
 				response.sendRedirect("Index");
 			}
 		} catch (DaoException e) {

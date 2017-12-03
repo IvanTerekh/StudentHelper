@@ -12,9 +12,6 @@ import edu.iba.sh.bean.Student;
 import edu.iba.sh.dao.DaoException;
 import edu.iba.sh.dao.DaoFactory;
 
-/**
- * Servlet implementation class StudentForm
- */
 @WebServlet("/StudentForm")
 public class StudentFormController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

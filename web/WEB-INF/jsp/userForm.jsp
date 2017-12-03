@@ -16,7 +16,7 @@
     <br>Password:<input type="password" name="password" value="${user.password}">
     <br>Role:<input name="role" value="${user.role}">
     
-    <input type="submit" value="Save">
+    <br><input type="submit" value="Save">
 </form>
 
 <c:if test="${user.user ne ''}">

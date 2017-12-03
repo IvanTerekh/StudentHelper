@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><%@page import="java.util.List"%>
 <%@page import="edu.iba.sh.bean.Student"%>
 <%@page
@@ -14,10 +15,12 @@
 
 <a href="StudentList">Students</a><br>
 <a href="GroupList">Groups</a><br>
-<a href="#">Marks</a><br>
-<a href="#">Professors</a><br>
-<a href="#">Studies</a><br>
-<a href="#">Users</a><br>
+<a href="MarkList">Marks</a><br>
+<a href="ProffesorList">Professors</a><br>
+<a href="StudyList">Studies</a><br>
+<c:if test="${user.role eq 'admin'}">
+    <a href="UserList">Users</a><br>
+</c:if>
 
 
 </body>

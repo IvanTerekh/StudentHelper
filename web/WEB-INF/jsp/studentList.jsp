@@ -24,9 +24,14 @@
     <c:forEach var="student" items="${studentList}">
         <tr>
             <td>
-            	<a href="StudentForm?id=${student.id}">
-            		${student.firstName}
-            	</a>
+                <c:if test="${user.role eq 'admin'}">
+                    <a href="StudentForm?id=${student.id}">
+                            ${student.firstName}
+                    </a>
+                </c:if>
+                <c:if test="${user.role ne 'admin'}">
+                    ${student.firstName}
+                </c:if>
             </td>
             <td>${student.secondName}</td>
             <td>${student.avgMark}</td>
@@ -36,9 +41,11 @@
    </c:forEach>
 </table>
 
+<c:if test="${user.role eq 'admin'}">
 <form action="StudentForm">
 	<input type="submit" value="New">
 </form>
+</c:if>
 
 <form action="Index">
 	<input type="submit" value="Back">

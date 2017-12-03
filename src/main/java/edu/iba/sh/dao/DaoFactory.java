@@ -42,4 +42,15 @@ public class DaoFactory {
 				return null;
 		}
 	}
+
+	public static MarkDao getMarkDao() {
+		switch (currentType) {
+			case DB2:
+				return new edu.iba.sh.dao.db2.MarkDaoImplementation();
+			case MySql:
+				return new edu.iba.sh.dao.mysql.MarkDaoImplementation();
+			default:
+				return null;
+		}
+	}
 }

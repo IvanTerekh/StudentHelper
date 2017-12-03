@@ -17,9 +17,8 @@
     <br>Group number:<input name="groupNumber" value="${group.groupNumber}">
     <br>Average mark:<input name="avgMark" value="${group.avgMark}">
     <input type="hidden" name="new" value="${isNew}">
-    <br>
 
-    <input type="submit" value="Save">
+    <br><input type="submit" value="Save">
 </form>
 
 <c:if test="${group.groupNumber ne ''}">
