@@ -29,23 +29,9 @@ public class StudentDaoImplementation implements StudentDao {
             + " (FIRST_NAME, SECOND_NAME, AVG_MARK, GROUP_NUMBER) "
             + " VALUES (?, ?, ?, ?) ";
 
-    private Connection getConnection() throws DaoException {
-        try {
-            String jndiName = "jdbc/StudentHelperDS";
-            DataSource dataSource = (DataSource) new InitialContext()
-                    .lookup(jndiName);
-
-            return dataSource.getConnection();
-        } catch (NamingException e) {
-            throw new DaoException(e);
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-    }
-
     @Override
     public void create(Student student) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(CREATE_SQL, Statement.RETURN_GENERATED_KEYS);
@@ -72,7 +58,7 @@ public class StudentDaoImplementation implements StudentDao {
 
     @Override
     public List<Student> getAll() throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(GET_ALL_SQL);
@@ -102,7 +88,7 @@ public class StudentDaoImplementation implements StudentDao {
 
     @Override
     public Student getById(long id) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(GET_BY_ID_SQL);
@@ -132,7 +118,7 @@ public class StudentDaoImplementation implements StudentDao {
 
     @Override
     public boolean update(Student student) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(UPDATE_SQL);
@@ -156,7 +142,7 @@ public class StudentDaoImplementation implements StudentDao {
 
     @Override
     public boolean deleteById(long id) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(DELETE_BY_ID_SQL);

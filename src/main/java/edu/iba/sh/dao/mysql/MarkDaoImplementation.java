@@ -26,25 +26,9 @@ public class MarkDaoImplementation implements MarkDao {
             + " (ID, STUDY_ID, STUDENT_ID, DATE, PROFESSOR_ID, MARK, COMMENTS) "
             + " VALUES (DEFAULT, ?, ?, ?, ?, ?, ?) ";
 
-    private ResourceBundle resources = ResourceBundle.getBundle("mysql");
-
-    private Connection getConnection() throws DaoException {
-        try {
-            java.sql.Driver driver = new com.mysql.jdbc.Driver();
-            DriverManager.registerDriver(driver);
-
-            return DriverManager.getConnection(
-                    resources.getString("url"),
-                    resources.getString("user"),
-                    resources.getString("password"));
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-    }
-
     @Override
     public void create(Mark mark) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(CREATE_SQL, Statement.RETURN_GENERATED_KEYS);
@@ -73,7 +57,7 @@ public class MarkDaoImplementation implements MarkDao {
 
     @Override
     public List<Mark> getAll() throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(GET_ALL_SQL);
@@ -104,7 +88,7 @@ public class MarkDaoImplementation implements MarkDao {
 
     @Override
     public Mark getById(long id) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(GET_BY_ID_SQL);
@@ -135,7 +119,7 @@ public class MarkDaoImplementation implements MarkDao {
 
     @Override
     public boolean update(Mark mark) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(UPDATE_SQL);
@@ -160,7 +144,7 @@ public class MarkDaoImplementation implements MarkDao {
 
     @Override
     public boolean deleteById(long id) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(DELETE_BY_ID_SQL);

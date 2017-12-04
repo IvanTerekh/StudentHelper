@@ -8,7 +8,11 @@ public class DaoFactory {
 		DB2, MySql
 	}
 
-	private static Type currentType = Type.MySql;
+	private static Type currentType = Type.DB2;
+
+	public static Type getCurrentType() {
+		return currentType;
+	}
 
 	public static StudentDao getStudentDao() {
 		switch (currentType) {
@@ -52,5 +56,16 @@ public class DaoFactory {
 			default:
 				return null;
 		}
+	}
+
+	public static ProfessorDao getProfessorDao() {
+		switch (currentType) {
+		case DB2:
+			return new edu.iba.sh.dao.db2.ProfessorDaoImplementation();
+		case MySql:
+			return new edu.iba.sh.dao.mysql.ProfessorDaoImplementation();
+		default:
+			return null;
+	}
 	}
 }

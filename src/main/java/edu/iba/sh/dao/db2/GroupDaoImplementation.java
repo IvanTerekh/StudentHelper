@@ -4,13 +4,9 @@ import edu.iba.sh.bean.Group;
 import edu.iba.sh.dao.DaoException;
 import edu.iba.sh.dao.GroupDao;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class GroupDaoImplementation implements GroupDao {
     private static final String GET_ALL_SQL = "SELECT "
@@ -28,26 +24,10 @@ public class GroupDaoImplementation implements GroupDao {
             + " (GROUP_NUMBER, AVG_MARK) "
             + " VALUES (?, ?) ";
 
-    private ResourceBundle resources = ResourceBundle.getBundle("mysql");
-
-    private Connection getConnection() throws DaoException {
-        try {
-            String jndiName = "jdbc/StudentHelperDS";
-            DataSource dataSource = (DataSource) new InitialContext()
-                    .lookup(jndiName);
-
-            return dataSource.getConnection();
-        } catch (NamingException e) {
-            throw new DaoException(e);
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-
-    }
 
     @Override
     public void create(Group group) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(CREATE_SQL);
@@ -66,7 +46,7 @@ public class GroupDaoImplementation implements GroupDao {
 
     @Override
     public List<Group> getAll() throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(GET_ALL_SQL);
@@ -93,7 +73,7 @@ public class GroupDaoImplementation implements GroupDao {
 
     @Override
     public Group getByGroupNumber(String oldGroupNumber) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(GET_BY_GROUP_NUMBER_SQL);
@@ -120,7 +100,7 @@ public class GroupDaoImplementation implements GroupDao {
 
     @Override
     public boolean update(Group group, String oldGroupNumber) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(UPDATE_SQL);
@@ -142,7 +122,7 @@ public class GroupDaoImplementation implements GroupDao {
 
     @Override
     public boolean deleteByGroupNumber(String groupNumber) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(DELETE_BY_ID_SQL);

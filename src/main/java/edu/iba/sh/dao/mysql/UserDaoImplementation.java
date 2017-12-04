@@ -31,25 +31,9 @@ public class UserDaoImplementation implements UserDao {
             " AND " +
             " PASSWORD = ? ";
 
-    private ResourceBundle resources = ResourceBundle.getBundle("mysql");
-
-    private Connection getConnection() throws DaoException {
-        try {
-            java.sql.Driver driver = new com.mysql.jdbc.Driver();
-            DriverManager.registerDriver(driver);
-
-            return DriverManager.getConnection(
-                    resources.getString("url"),
-                    resources.getString("user"),
-                    resources.getString("password"));
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-    }
-
     @Override
     public void create(User user) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(CREATE_SQL);
@@ -69,7 +53,7 @@ public class UserDaoImplementation implements UserDao {
 
     @Override
     public List<User> getAll() throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(GET_ALL_SQL);
@@ -97,7 +81,7 @@ public class UserDaoImplementation implements UserDao {
 
     @Override
     public User getByUser(String user) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(GET_BY_USER_SQL);
@@ -125,7 +109,7 @@ public class UserDaoImplementation implements UserDao {
 
     @Override
     public boolean update(User user, String oldUser) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(UPDATE_SQL);
@@ -148,7 +132,7 @@ public class UserDaoImplementation implements UserDao {
 
     @Override
     public boolean deleteByUser(String user) throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(DELETE_BY_USER_SQL);
@@ -169,7 +153,7 @@ public class UserDaoImplementation implements UserDao {
     @Override
     public User getByUserAndPassword(String user, String password)
             throws DaoException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(GET_BY_USER_AND_PASSWORD_SQL);
