@@ -12,7 +12,7 @@ public class Professor {
 	
 	private String birthDate;
 	
-	private String avgMark;
+	private double avgMark;
 
 	public int getId() {
 		return id;
@@ -54,11 +54,11 @@ public class Professor {
 		this.birthDate = birthDate;
 	}
 
-	public String getAvgMark() {
+	public double getAvgMark() {
 		return avgMark;
 	}
 
-	public void setAvgMark(String avgMark) {
+	public void setAvgMark(double avgMark) {
 		this.avgMark = avgMark;
 	}
 	

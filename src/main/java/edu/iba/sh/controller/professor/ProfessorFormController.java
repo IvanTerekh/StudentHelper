@@ -17,7 +17,7 @@ public class ProfessorFormController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
-    
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idStr = request.getParameter("id");
         Professor professor;
@@ -30,7 +30,7 @@ public class ProfessorFormController extends HttpServlet {
         }
 
         request.setAttribute("professor", professor);
-        request.getRequestDispatcher("/WEB-INF/jsp/studentForm.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/professorForm.jsp").forward(request, response);
     }
 
     private Professor getProfessor(int id) throws ServletException {

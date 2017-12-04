@@ -16,7 +16,7 @@
 <a href="StudentList">Students</a><br>
 <a href="GroupList">Groups</a><br>
 <a href="MarkList">Marks</a><br>
-<a href="ProffesorList">Professors</a><br>
+<a href="ProfessorList">Professors</a><br>
 <a href="StudyList">Studies</a><br>
 <c:if test="${user.role eq 'admin'}">
     <a href="UserList">Users</a><br>

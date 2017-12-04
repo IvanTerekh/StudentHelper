@@ -8,7 +8,7 @@ public class DaoFactory {
 		DB2, MySql
 	}
 
-	private static Type currentType = Type.DB2;
+	private static Type currentType = Type.MySql;
 
 	public static Type getCurrentType() {
 		return currentType;
