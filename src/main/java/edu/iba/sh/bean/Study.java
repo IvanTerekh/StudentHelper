@@ -47,17 +47,7 @@ public class Study {
 		return avgMark;
 	}
 
-	public void setAvgMark(float avgMark) {
-		this.avgMark = avgMark;
-	}
-
-	public Study(long id, String name, int hours, long professorId,
-			float avgMark) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.hours = hours;
-		this.professorId = professorId;
+	public void setAvgMark(double avgMark) {
 		this.avgMark = avgMark;
 	}
 

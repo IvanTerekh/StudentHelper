@@ -13,9 +13,6 @@ import edu.iba.sh.bean.Student;
 import edu.iba.sh.dao.DaoException;
 import edu.iba.sh.dao.DaoFactory;
 
-/**
- * Servlet implementation class StudentListController
- */
 @WebServlet("/StudentList")
 public class StudentListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
