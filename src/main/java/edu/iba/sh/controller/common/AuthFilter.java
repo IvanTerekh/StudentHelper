@@ -59,12 +59,18 @@ public class AuthFilter implements Filter {
 		if (url.matches("^.*/\\w*(Form|Save|Delete)$")){
 			return accessGrantedForEdit(url, role);
 		} else if (url.endsWith("UserList")) {
-			return accessGrantedForViewUsers(url, role);
+			return accessGrantedForViewUsers(role);
+		} else if (url.equals("SendMessageForm") || url.equals("SendMessage")) {
+			return accessGrantedForSendMessage(role);
 		}
 		return true;
 	}
 
-	private boolean accessGrantedForViewUsers(String url, String role) {
+	private boolean accessGrantedForSendMessage(String role) {
+		return role.equals("admin");
+	}
+
+	private boolean accessGrantedForViewUsers(String role) {
 		return role.equals("admin");
 	}
 
