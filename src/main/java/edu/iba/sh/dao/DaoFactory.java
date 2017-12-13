@@ -58,6 +58,17 @@ public class DaoFactory {
         }
     }
 
+    public static MarkInfoDao getMarkInfoDao() {
+        switch (currentType) {
+            case DB2:
+                return new edu.iba.sh.dao.db2.MarkInfoDaoImplementation();
+            case MySql:
+                return new edu.iba.sh.dao.mysql.MarkInfoDaoImplementation();
+            default:
+                return null;
+        }
+    }
+
     public static ProfessorDao getProfessorDao() {
         switch (currentType) {
             case DB2:

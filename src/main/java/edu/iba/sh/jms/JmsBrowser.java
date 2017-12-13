@@ -15,8 +15,8 @@ import com.ibm.mq.jms.MQQueueSender;
 import com.ibm.mq.jms.MQQueueSession;
 
 public class JmsBrowser {
-
-	public List<String> getMessages(){
+	
+	public static Enumeration getMessages(){
 		MQQueueBrowser browser;
 		MQQueueSession session;
 		MQQueueConnection connection;
@@ -31,20 +31,13 @@ public class JmsBrowser {
 					.createConnection();
 
 			session = (MQQueueSession) connection.createSession(false,
-					Session.AUTO_ACKNOWLEDGE);//Session.CLIENT_ACKNOWLEDGE
+					Session.CLIENT_ACKNOWLEDGE);//Session.CLIENT_ACKNOWLEDGE
 
 			MQQueue queue = (MQQueue) session.createQueue("Queue1");
 			
 			browser = (MQQueueBrowser) session.createBrowser(queue);
 			
-			Enumeration e = browser.getEnumeration();
-			
-			while(e.hasMoreElements()){
-				JMSTextMessage message = (JMSTextMessage) e.nextElement();
-				result.add(message.getText());
-			}
-			return result;
-			
+			return browser.getEnumeration();
 		} catch (Exception e) {
 			throw new JmsException(e);
 		} finally {
@@ -59,5 +52,28 @@ public class JmsBrowser {
 			}
 		}
 	}
+
+	public static List<String> getTextOfMessages(){
+		Enumeration e = getMessages();
+		
+		while(e.hasMoreElements()){
+			JMSTextMessage message = (JMSTextMessage) e.nextElement();
+			result.add(message.getText());
+		}
+		return result;
+	}
+	
+	public static void delete(String text) {
+		Enumeration e = getMessages();
+		
+		while(e.hasMoreElements()){
+			JMSTextMessage message = (JMSTextMessage) e.nextElement();
+			if (message.getText().equals(text)){
+				message.acknowledge();
+				return;
+			}
+		}
+	}
+	
 	
 }

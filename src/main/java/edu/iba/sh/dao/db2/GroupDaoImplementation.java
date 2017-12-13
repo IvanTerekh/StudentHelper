@@ -11,7 +11,7 @@ import java.util.List;
 public class GroupDaoImplementation implements GroupDao {
     private static final String GET_ALL_SQL = "SELECT "
             + " GROUP_NUMBER, AVG_MARK "
-            + " FROM groups ";
+            + " FROM groups";
     private static final String GET_BY_GROUP_NUMBER_SQL = "SELECT "
             + " GROUP_NUMBER, AVG_MARK "
             + " FROM groups WHERE GROUP_NUMBER = ? ";

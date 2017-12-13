@@ -27,17 +27,17 @@
 </c:if>
 
 <c:if test="${user.role eq 'admin'}">
+<hr>
     <a href="SendMessageForm">Send new message</a><br>
-    <hr>
 </c:if>
 
 <c:forEach var="message" items="${messages}">
+    <br>
     ${message}
     <c:if test="${user.role eq 'admin'}">
         <br><a href="DeleteMessage">Delete</a>
     </c:if>
     <br>
-    <hr>
 </c:forEach>
 
 

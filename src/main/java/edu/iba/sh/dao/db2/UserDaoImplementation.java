@@ -68,7 +68,7 @@ public class UserDaoImplementation implements UserDao {
                 User user = new User();
                 user.setUser(set.getString("USER"));
                 user.setPassword(set.getString("PASSWORD"));
-                user.setRole(set.getString("ROLE"));
+                user.setRole(set.getString("ROLE").toLowerCase());
                 list.add(user);
             }
 
@@ -96,7 +96,7 @@ public class UserDaoImplementation implements UserDao {
                 User foundUser = new User();
                 foundUser.setUser(set.getString("USER"));
                 foundUser.setPassword(set.getString("PASSWORD"));
-                foundUser.setRole(set.getString("ROLE"));
+                foundUser.setRole(set.getString("ROLE").toLowerCase());
                 return foundUser;
             }
 
@@ -169,7 +169,7 @@ public class UserDaoImplementation implements UserDao {
                 User userBean = new User();
                 userBean.setUser(user);
                 userBean.setPassword(password);
-                userBean.setRole(set.getString("ROLE"));
+                userBean.setRole(set.getString("ROLE").toLowerCase());
                 return userBean;
             }
 

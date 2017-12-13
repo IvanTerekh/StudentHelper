@@ -13,7 +13,7 @@
 <body>
 
 <form action="GroupSave" method="post">
-    <input type="hidden" name="oldGroupNumber" value="${group.groupNumber}"
+    <input type="hidden" name="oldGroupNumber" value="${group.groupNumber}">
     <br>Group number:<input name="groupNumber" value="${group.groupNumber}">
     <br>Average mark:<input name="avgMark" value="${group.avgMark}">
     <input type="hidden" name="new" value="${isNew}">

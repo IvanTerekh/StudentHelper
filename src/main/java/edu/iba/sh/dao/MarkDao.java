@@ -1,6 +1,7 @@
 package edu.iba.sh.dao;
 
 import edu.iba.sh.bean.Mark;
+import edu.iba.sh.bean.MarkInfo;
 
 import java.util.List;
 

@@ -56,7 +56,7 @@ public class AuthFilter implements Filter {
 
 	private boolean accessGranted(User user, String url) {
 		String role = user.getRole();
-		if (url.matches("^.*/\\w*(Form|Save|Delete)$")){
+		if (url.matches("^.*/(Group|Mark|Professor|Student|Study|User)(Form|Save|Delete)$")){
 			return accessGrantedForEdit(url, role);
 		} else if (url.endsWith("UserList")) {
 			return accessGrantedForViewUsers(role);
